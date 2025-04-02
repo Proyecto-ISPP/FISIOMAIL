@@ -39,7 +39,8 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     "4.233.69.159",
     "fisiomail.fisiofind.com",
-    "127.0.0.1"
+    "127.0.0.1",
+    "localhost"
     
 ]
 
