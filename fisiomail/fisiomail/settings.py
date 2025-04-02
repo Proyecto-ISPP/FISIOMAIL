@@ -23,12 +23,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%d+ryu(rr4wnuma#$d8#&3ge)b1ic^psy=)x0_qtr3s-ysillm'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('X-Forwarded-Proto', 'https')
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://fisiomail.fisiofind.com/"
+]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "4.233.69.159",
+    "fisiomail.fisiofind.com",
+    
+]
 
 
 # Application definition
@@ -41,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +64,43 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://s2.fisiofind.com/",          # frontend Sprint 2
+    "https://front-s2.fisiofind.com/",    # si accedes desde aquí también
+    "https://s3.fisiofind.com/",          # por si tu frontend futuro apunta aquí
+    "https://front-s3.fisiofind.com/",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://s2.fisiofind.com/",
+    "https://front-s2.fisiofind.com/",
+    "https://s3.fisiofind.com/",
+    "https://front-s3.fisiofind.com/",
+]
+
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 ROOT_URLCONF = 'fisiomail.urls'
