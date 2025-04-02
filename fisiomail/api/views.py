@@ -10,6 +10,8 @@ from cryptography.hazmat.primitives import padding
 from django.core.mail import send_mail
 import base64
 import os
+from rest_framework.decorators import api_view
+import random 
 
 class SendEmailAPI(APIView):
     def post(self, request, *args, **kwargs):
@@ -71,3 +73,22 @@ class SendEmailAPI(APIView):
 
         return unpadded_data.decode('utf-8')
 
+@api_view(['POST'])
+def test(request):
+    if request.headers.get('X-API-Key') != settings.API_KEY:
+        return Response({"detail": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
+    random_number = random.randint(1, 100)
+    body = f"""
+    <h1>Esto es un correo de prueba</h1>
+    <p>El número aleatorio generado es: {random_number}</p>
+    """
+    email = EmailMessage(
+             subject="Esto es un correo de prueba",
+             body=body,
+             from_email='no-reply@fisiofind.com',
+             to=["danvelcam@alum.us.es"],
+            )
+    email.content_subtype = "html"
+    email.send()
+    return Response(status=status.HTTP_200_OK)
+    
