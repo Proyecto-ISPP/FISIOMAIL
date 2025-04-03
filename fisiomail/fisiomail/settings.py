@@ -43,6 +43,8 @@ ALLOWED_HOSTS = [
     "s2-api.fisiofind.com",
     "s2.fisiofind.com",
     "s3.fisiofind.com",
+    "localhost",
+    "127.0.0.1"
     
 ]
 
