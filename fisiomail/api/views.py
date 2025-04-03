@@ -72,25 +72,3 @@ class SendEmailAPI(APIView):
         unpadded_data = unpadder.update(decrypted_data) + unpadder.finalize()
 
         return unpadded_data.decode('utf-8')
-
-@api_view(['POST'])
-def test(request):
-    try:
-        if request.headers.get('X-API-Key') != settings.API_KEY:
-            return Response({"detail": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
-        random_number = random.randint(1, 100)
-        body = f"""
-        <h1>Esto es un correo de prueba</h1>
-        <p>El número aleatorio generado es: {random_number}</p>
-        """
-        email = EmailMessage(
-                subject="Esto es un correo de prueba",
-                body=body,
-                from_email='no-reply@fisiofind.com',
-                to=["danvelcam@alum.us.es"],
-                )
-        email.content_subtype = "html"
-        email.send()
-        return Response(status=status.HTTP_200_OK)
-    except Exception as e:
-        return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

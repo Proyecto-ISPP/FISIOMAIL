@@ -4,5 +4,4 @@ from api import views
 
 urlpatterns = [
     path('send', SendEmailAPI.as_view(), name='send-email'),
-    path('test', views.test, name='test'),
 ]
