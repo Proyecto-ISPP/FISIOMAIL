@@ -39,8 +39,10 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     "4.233.69.159",
     "fisiomail.fisiofind.com",
-    "127.0.0.1",
-    "localhost"
+    "s3-api.fisiofind.com",
+    "s2-api.fisiofind.com",
+    "s2.fisiofind.com",
+    "s3.fisiofind.com",
     
 ]
 
@@ -70,16 +72,16 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-     "https://s2.fisiofind.com",          # frontend Sprint 2
-     "https://front-s2.fisiofind.com",    # si accedes desde aquí también
-     "https://s3.fisiofind.com",          # por si tu frontend futuro apunta aquí
-     "https://front-s3.fisiofind.com",
+     "https://s2.fisiofind.com",          
+     "https://api-s2.fisiofind.com",    
+     "https://s3.fisiofind.com",          
+     "https://s3-api.fisiofind.com"
  ]
 CSRF_TRUSTED_ORIGINS = [
      "https://s2.fisiofind.com",
-     "https://front-s2.fisiofind.com",
+     "https://api-s2.fisiofind.com",
      "https://s3.fisiofind.com",
-     "https://front-s3.fisiofind.com",
+     "https://api-s3.fisiofind.com",
  ]
 
 
