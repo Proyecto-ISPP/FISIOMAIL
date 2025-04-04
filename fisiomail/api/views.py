@@ -38,7 +38,7 @@ class SendEmailAPI(APIView):
             email = EmailMessage(
              subject=subject,
              body=body,
-             from_email='no-reply@fisiofind.com',
+             from_email=settings.EMAIL_HOST_USER,
              to=[recipient],
             )
             email.content_subtype = "html"
